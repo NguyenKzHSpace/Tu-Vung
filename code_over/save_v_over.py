@@ -21,7 +21,18 @@ class Ui_MainWindow_Save_v_over(Ui_MainWindow_Save_v):
         if text is None or len(text)<=0:
             return
         text = text.lower()
-        
+        while text.find("  ")>=0:
+            text = text.replace("  "," ")
+        while text.endswith(" "):
+            text = text[:-2]
+        while text.startswith(" "):
+            text = text[1:]
+        _text  = ""
+        for c in text:
+            if  c!=" " and c!="'" and c!="-" and (c<"a" or c>"z"):
+                continue
+            _text+=c
+        text = _text
         result = translate.translate(text, src='en', dest='vi')
         result = str(result.text)
       
